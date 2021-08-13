@@ -17,7 +17,6 @@ mydb = mysql.connector.connect(host= 'localhost',
 mycursor = mydb.cursor()
 
 mycursor.execute("select title, budget, revenue from movie limit 25")
-result = mycursor.fetchall
 
 title = []
 budget = []
@@ -43,7 +42,7 @@ plt.xlim(0, 25)
 plt.xlabel("Titles")
 plt.ylabel("Budgets per 1000000/ Revenue per 1000000")
 plt.xticks(rotation = 85)
-
+plt.subplots_adjust(bottom=0.424)
 
 plt.show()
 mydb.close()
