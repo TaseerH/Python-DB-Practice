@@ -1,10 +1,17 @@
 import mysql.connector
 import numpy as np
 from tkinter import *
+import urllib.request
 import re
+from tkinter.tix import *
 
 root = Tk()
 root.title("Entry Form")
+frame = Frame(width="1920",height="1000")
+frame.pack()
+swin = ScrolledWindow(frame, width=1920, height=900)
+swin.pack()
+root = swin.window
 
 mydb = mysql.connector.connect(host= 'localhost', 
                                user= 'root', 
@@ -14,7 +21,7 @@ mydb = mysql.connector.connect(host= 'localhost',
 mycursor = mydb.cursor()
 
 query = "insert into practice (first_name, second_name, age, school) values (%s,%s,%s,%s)"
-query2 = "select * from practice;"
+query2 = "select * from movie limit 60;"
 
 warn = Label(root, text=".")
 warn.grid(row=0, column = 3)
@@ -25,7 +32,7 @@ def show_data():
     j = 0
     for first_name in mycursor: 
         for j in range(len(first_name)):
-            e = Entry(root, width=10, fg='blue') 
+            e = Entry(root, width=35, fg='blue') 
             e.grid(row=i, column=j) 
             e.insert(END, first_name[j])
         i=i+1
@@ -92,5 +99,8 @@ school.grid(row=3, column=1, padx=20)
 
 submit_btn = Button(root, text="Add records to Database", command=lambda: submit())
 submit_btn.grid(row=4, column = 0, columnspan= 2, pady=10, padx= 10, ipadx=100)
+
+submit_btn = Button(root, text="Show Database", command=lambda: show_data())
+submit_btn.grid(row=5, column = 0, columnspan= 2, pady=10, padx= 10, ipadx=100)
 
 root.mainloop()
