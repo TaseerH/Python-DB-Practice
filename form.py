@@ -21,7 +21,7 @@ mydb = mysql.connector.connect(host= 'localhost',
 mycursor = mydb.cursor()
 
 query = "insert into practice (first_name, second_name, age, school) values (%s,%s,%s,%s)"
-query2 = "select * from movie limit 60;"
+query2 = "select * from practice;"
 
 warn = Label(root, text=".")
 warn.grid(row=0, column = 3)
